@@ -1,6 +1,14 @@
-# React + Vite
+# Contact Book using React, React-Router, Redux
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### This project was created as a part of Intern Assessment:
+
+## To run this code:
+
+- clone this repository
+- install packages using : npm install
+- run with : npm run dev
+
+That's all!
 
 Currently, two official plugins are available:
 
