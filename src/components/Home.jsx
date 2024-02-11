@@ -4,30 +4,32 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import store from "../store/store";
 import { setData } from "../store/dataSlice";
+import Header from './Header';
+import Footer from './Footer';
 
 function Home() {
   const [results,setresult] = useState([]);
   const [loading,setLoading] = useState(true);
   const [err, setErr] = useState(null);
 
-  useEffect(()=>{
+  const fetchData = async (page='1', contacts='15') => {
+    setLoading(true);
+    console.log(page,contacts);
+    try {
+      const response = await axios.get(`https://randomuser.me/api/?page=${page}&results=${contacts}&seed=abc`);
+      const results = response.data["results"];
 
-    const fetchData = async () => {
-      try {
+      setresult(results);
+      store.dispatch(setData(results))
 
-        const response = await axios.get('https://randomuser.me/api/?page=1&results=15&seed=abc');
-        const results = response.data["results"];
-
-        setresult(results);
-        store.dispatch(setData(results))
-
-      } catch (err) {
-       setErr(err);
-      } finally {
-        setLoading(false);
-      }
+    } catch (err) {
+     setErr(err);
+    } finally {
+      setLoading(false);
     }
-    
+  }
+
+  useEffect(()=>{    
     fetchData();
   },[])
 
@@ -50,13 +52,17 @@ function Home() {
   }
 
   return (
-    <main >
+    <>
+      <Header loadData={fetchData}/>
+      <main >
 
-      {results.map((result) => (
-          <SmallCard key={result.id.phone} name={result.name} gender={result.gender} photo={result.picture} country={result.location.country} id={results.indexOf(result)} />
-      ))}
+        {results.map((result) => (
+            <SmallCard key={result.id.phone} name={result.name} gender={result.gender} photo={result.picture} country={result.location.country} id={results.indexOf(result)} />
+        ))}
 
-    </main>
+      </main>
+      <Footer />
+    </>
   )
 }
 
