@@ -7,16 +7,20 @@ import { setData } from "../store/dataSlice";
 import Header from './Header';
 import Footer from './Footer';
 
+let page = '1', contacts = '15';
+
 function Home() {
   const [results,setresult] = useState([]);
   const [loading,setLoading] = useState(true);
   const [err, setErr] = useState(null);
 
-  const fetchData = async (page='1', contacts='15') => {
+  const fetchData = async (p, c) => {
     setLoading(true);
-    console.log(page,contacts);
+    page = p;
+    contacts = c;
+
     try {
-      const response = await axios.get(`https://randomuser.me/api/?page=${page}&results=${contacts}&seed=abc`);
+      const response = await axios.get(`https://randomuser.me/api/?&page=${page}&results=${contacts}&seed=abc`);
       const results = response.data["results"];
 
       setresult(results);
@@ -30,7 +34,7 @@ function Home() {
   }
 
   useEffect(()=>{    
-    fetchData();
+    fetchData(page,contacts);
   },[])
 
   if(loading){
