@@ -12,4 +12,4 @@ That's all!
 
 Live on:
 
-- [Link](https://taupe-begonia-a118ff.netlify.app/)
+- [Link](https://vocal-sunflower-770480.netlify.app/)
