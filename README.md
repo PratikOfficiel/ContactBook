@@ -1,6 +1,6 @@
 # Contact Book using React, React-Router, Redux
 
-### This project was created as a part of Intern Assessment:
+### This project was created as a part of Internship Hiring Assessment:
 
 ## To run this code:
 
